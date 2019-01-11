@@ -54,7 +54,7 @@ void operation(){
     switch(c){
         case '1': paking();break;
         case '2': pickup();break;
-        case '3': exit(1);break;
+        case '3': destroyLinkStack(&parkstack);destroyLinkStack(&assstack);DestroyQueue(&que);exit(1);break;
         default:printf(" 输入错误，请重新输入\n");return;
     }
 }
@@ -74,11 +74,18 @@ void paking(){
 
 
 void init(){
-
+    char s;
     printf("  请输入停车场最大可停数量\n");
     printf("  ");
-    scanf("%d", &cd);
-    getchar();
+    while(scanf("%c", &s)){
+	getchar();
+	if('0'<=s&&s<='9'){
+		break;
+	}else{
+		printf("  请输入数字\n");
+	}
+    }
+    cd=s-'0';
     parkstack=initLinkStack();
     assstack=initLinkStack();
     InitQueue(&que);
